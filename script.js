@@ -102,7 +102,7 @@ function gameLoop() {
     // Game over logic
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#000";
-    ctx.font = "30px Arial";
+    ctx.font = "28px Arial";
     ctx.fillText("Game over. Try again. Score: " + score, 50, canvas.height / 2);
     console.log("Game over! Score: " + score);
     return;
@@ -127,7 +127,7 @@ function gameLoop() {
 
 function drawScore() {
   ctx.fillStyle = "#000";
-  ctx.font = "28px Arial";
+  ctx.font = "20px Arial";
   ctx.fillText("Score: " + score, 10, 30);
   ctx.fillText("Level: " + level, 10, 60);
 }
@@ -158,54 +158,6 @@ document.addEventListener('keydown', e => {
         dy = 0;
       }
       break;
-  }
-});
-
-// Touch controls
-let touchStartX = 0;
-let touchStartY = 0;
-document.addEventListener('touchstart', e => {
-  touchStartX = e.touches[0].clientX;
-  touchStartY = e.touches[0].clientY;
-});
-
-document.addEventListener('touchend', e => {
-  const touchEndX = e.changedTouches[0].clientX;
-  const touchEndY = e.changedTouches[0].clientY;
-  const dx = touchEndX - touchStartX;
-  const dy = touchEndY - touchStartY;
-  if (Math.abs(dx) > Math.abs(dy)) {
-    if (dx > 0 && dy === 0) {
-      // Right swipe
-      if (dx === 0) return;
-      if (dy === 0) {
-        dx = 1;
-        dy = 0;
-      }
-    } else if (dx < 0 && dy === 0) {
-      // Left swipe
-      if (dx === 0) return;
-      if (dy === 0) {
-        dx = -1;
-        dy = 0;
-      }
-    }
-  } else {
-    if (dy > 0 && dx === 0) {
-      // Down swipe
-      if (dy === 0) return;
-      if (dx === 0) {
-        dx = 0;
-        dy = 1;
-      }
-    } else if (dy < 0 && dx === 0) {
-      // Up swipe
-      if (dy === 0) return;
-      if (dx === 0) {
-        dx = 0;
-        dy = -1;
-      }
-    }
   }
 });
 
