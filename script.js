@@ -1,12 +1,16 @@
-const canvas = document.getElementById('gameCanvas');
-const ctx = canvas.getContext('2d');
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
 
-const gridSize = 20;
-const snakeColor = '#808080';
-const foodColor = '#FF0000';
-const obstacleColor = '#000000';
+const gridSize = 18;
+const snakeColor = "#808080";
+const foodColor = "#FF0000";
+const obstacleColor = "#000000";
 
-let snake = [{ x: 10, y: 10 }, { x: 9, y: 10 }, { x: 8, y: 10 }];
+let snake = [
+  { x: 10, y: 10 },
+  { x: 9, y: 10 },
+  { x: 8, y: 10 },
+];
 let food = { x: 15, y: 15 };
 let obstacles = [];
 let dx = 1;
@@ -17,8 +21,13 @@ let speedMultiplier = 1.2;
 
 function drawSnake() {
   ctx.fillStyle = snakeColor;
-  snake.forEach(segment => {
-    ctx.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize, gridSize);
+  snake.forEach((segment) => {
+    ctx.fillRect(
+      segment.x * gridSize,
+      segment.y * gridSize,
+      gridSize,
+      gridSize
+    );
   });
 }
 
@@ -29,8 +38,13 @@ function drawFood() {
 
 function drawObstacles() {
   ctx.fillStyle = obstacleColor;
-  obstacles.forEach(obstacle => {
-    ctx.fillRect(obstacle.x * gridSize, obstacle.y * gridSize, gridSize, gridSize);
+  obstacles.forEach((obstacle) => {
+    ctx.fillRect(
+      obstacle.x * gridSize,
+      obstacle.y * gridSize,
+      gridSize,
+      gridSize
+    );
   });
 }
 
@@ -42,17 +56,17 @@ function moveSnake() {
     if (score % 10 === 0) {
       level++;
       if (level === 2) {
-        speedMultiplier = 1; // Speed increase by 15% in level 2
+        speedMultiplier = 1;
       } else if (level === 3) {
-        speedMultiplier = 0.85; // Speed increase by 10% in level 3
+        speedMultiplier = 0.85;
       } else if (level === 4) {
-        speedMultiplier = 0.70; // Speed increase by 10% in level 4
+        speedMultiplier = 0.75;
         generateObstacles(2);
       } else if (level === 5) {
-        speedMultiplier = 0.60; // Speed increase by 10% in level 5
+        speedMultiplier = 0.65;
         generateObstacles(4);
       } else if (level === 6) {
-        speedMultiplier = 0.50; // Speed increase by 5% in level 6
+        speedMultiplier = 0.55;
         generateObstacles(6);
       }
     }
@@ -65,7 +79,7 @@ function moveSnake() {
 function generateFood() {
   food = {
     x: Math.floor(Math.random() * (canvas.width / gridSize)),
-    y: Math.floor(Math.random() * (canvas.height / gridSize))
+    y: Math.floor(Math.random() * (canvas.height / gridSize)),
   };
 }
 
@@ -90,11 +104,15 @@ function checkCollision() {
     return true;
   }
   // Check collision with obstacles
-  if (obstacles.some(obstacle => obstacle.x === head.x && obstacle.y === head.y)) {
+  if (
+    obstacles.some((obstacle) => obstacle.x === head.x && obstacle.y === head.y)
+  ) {
     return true;
   }
   // Check collision with itself
-  return snake.slice(1).some(segment => segment.x === head.x && segment.y === head.y);
+  return snake
+    .slice(1)
+    .some((segment) => segment.x === head.x && segment.y === head.y);
 }
 
 function gameLoop() {
@@ -103,7 +121,11 @@ function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#000";
     ctx.font = "28px Arial";
-    ctx.fillText("Game over. Try again. Score: " + score, 50, canvas.height / 2);
+    ctx.fillText(
+      "Game over. Try again. Score: " + score,
+      50,
+      canvas.height / 2
+    );
     console.log("Game over! Score: " + score);
     return;
   }
@@ -132,27 +154,27 @@ function drawScore() {
   ctx.fillText("Level: " + level, 10, 60);
 }
 
-document.addEventListener('keydown', e => {
+document.addEventListener("keydown", (e) => {
   switch (e.key) {
-    case 'ArrowUp':
+    case "ArrowUp":
       if (dy === 0) {
         dx = 0;
         dy = -1;
       }
       break;
-    case 'ArrowDown':
+    case "ArrowDown":
       if (dy === 0) {
         dx = 0;
         dy = 1;
       }
       break;
-    case 'ArrowLeft':
+    case "ArrowLeft":
       if (dx === 0) {
         dx = -1;
         dy = 0;
       }
       break;
-    case 'ArrowRight':
+    case "ArrowRight":
       if (dx === 0) {
         dx = 1;
         dy = 0;
