@@ -13,7 +13,7 @@ let dx = 1;
 let dy = 0;
 let score = 0;
 let level = 1;
-let speedMultiplier = 1;
+let speedMultiplier = 1.2;
 
 function drawSnake() {
   ctx.fillStyle = snakeColor;
@@ -42,15 +42,15 @@ function moveSnake() {
     if (score % 10 === 0) {
       level++;
       if (level === 2) {
-        speedMultiplier = 0.85; // Speed increase by 15% in level 2
+        speedMultiplier = 1; // Speed increase by 15% in level 2
       } else if (level === 3) {
-        speedMultiplier = 0.75; // Speed increase by 10% in level 3
+        speedMultiplier = 0.85; // Speed increase by 10% in level 3
       } else if (level === 4) {
-        speedMultiplier = 0.65; // Speed increase by 10% in level 4
+        speedMultiplier = 0.70; // Speed increase by 10% in level 4
         generateObstacles(2);
       } else if (level === 5) {
-        speedMultiplier = 0.55; // Speed increase by 10% in level 5
-        generateObstacles(6);
+        speedMultiplier = 0.60; // Speed increase by 10% in level 5
+        generateObstacles(4);
       } else if (level === 6) {
         speedMultiplier = 0.50; // Speed increase by 5% in level 6
         generateObstacles(6);
