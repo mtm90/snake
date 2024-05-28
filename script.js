@@ -94,7 +94,6 @@ function generateObstacles(numObstacles) {
 
 function checkCollision() {
   const head = snake[0];
-  // Check collision with boundaries
   if (
     head.x < 0 ||
     head.x >= canvas.width / gridSize ||
@@ -103,13 +102,11 @@ function checkCollision() {
   ) {
     return true;
   }
-  // Check collision with obstacles
   if (
     obstacles.some((obstacle) => obstacle.x === head.x && obstacle.y === head.y)
   ) {
     return true;
   }
-  // Check collision with itself
   return snake
     .slice(1)
     .some((segment) => segment.x === head.x && segment.y === head.y);
@@ -117,7 +114,6 @@ function checkCollision() {
 
 function gameLoop() {
   if (checkCollision()) {
-    // Game over logic
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#000";
     ctx.font = "28px Arial";
@@ -141,10 +137,8 @@ function gameLoop() {
 
   drawScore();
 
-  // Calculate speed based on level and speed multiplier
   const speed = 100 * speedMultiplier;
-
-  setTimeout(gameLoop, speed); // Loop with adjusted speed
+  setTimeout(gameLoop, speed);
 }
 
 function drawScore() {
@@ -162,29 +156,31 @@ function handleTouch(e) {
   const touchX = touch.clientX - canvas.getBoundingClientRect().left;
   const touchY = touch.clientY - canvas.getBoundingClientRect().top;
 
+  console.log(`Touch at: ${touchX}, ${touchY}`);
+
   const width = canvas.width;
   const height = canvas.height;
 
   if (touchX < width / 2 && touchY < height / 2) {
-    // Top-left quadrant
+    console.log("Top-left quadrant");
     if (dy === 0) {
       dx = 0;
       dy = -1;
     }
   } else if (touchX < width / 2 && touchY > height / 2) {
-    // Bottom-left quadrant
+    console.log("Bottom-left quadrant");
     if (dy === 0) {
       dx = 0;
       dy = 1;
     }
   } else if (touchX > width / 2 && touchY < height / 2) {
-    // Top-right quadrant
+    console.log("Top-right quadrant");
     if (dx === 0) {
       dx = 1;
       dy = 0;
     }
   } else if (touchX > width / 2 && touchY > height / 2) {
-    // Bottom-right quadrant
+    console.log("Bottom-right quadrant");
     if (dx === 0) {
       dx = -1;
       dy = 0;
