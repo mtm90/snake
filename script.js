@@ -154,6 +154,44 @@ function drawScore() {
   ctx.fillText("Level: " + level, 10, 60);
 }
 
+// Handle touch events
+canvas.addEventListener("touchstart", handleTouch);
+
+function handleTouch(e) {
+  const touch = e.touches[0];
+  const touchX = touch.clientX - canvas.getBoundingClientRect().left;
+  const touchY = touch.clientY - canvas.getBoundingClientRect().top;
+
+  const width = canvas.width;
+  const height = canvas.height;
+
+  if (touchX < width / 2 && touchY < height / 2) {
+    // Top-left quadrant
+    if (dy === 0) {
+      dx = 0;
+      dy = -1;
+    }
+  } else if (touchX < width / 2 && touchY > height / 2) {
+    // Bottom-left quadrant
+    if (dy === 0) {
+      dx = 0;
+      dy = 1;
+    }
+  } else if (touchX > width / 2 && touchY < height / 2) {
+    // Top-right quadrant
+    if (dx === 0) {
+      dx = 1;
+      dy = 0;
+    }
+  } else if (touchX > width / 2 && touchY > height / 2) {
+    // Bottom-right quadrant
+    if (dx === 0) {
+      dx = -1;
+      dy = 0;
+    }
+  }
+}
+
 document.addEventListener("keydown", (e) => {
   switch (e.key) {
     case "ArrowUp":
