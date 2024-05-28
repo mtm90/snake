@@ -161,29 +161,56 @@ function handleTouch(e) {
   const width = canvas.width;
   const height = canvas.height;
 
+  // Identify the quadrant and move the snake
   if (touchX < width / 2 && touchY < height / 2) {
     console.log("Top-left quadrant");
-    if (dy === 0) {
-      dx = 0;
-      dy = -1;
+    if (dx !== 1) { // Prevent 180 degree turn
+      dx = -1;
+      dy = 0;
     }
-  } else if (touchX < width / 2 && touchY > height / 2) {
+  } else if (touchX < width / 2 && touchY >= height / 2) {
     console.log("Bottom-left quadrant");
-    if (dy === 0) {
-      dx = 0;
-      dy = 1;
+    if (dx !== 1) { // Prevent 180 degree turn
+      dx = -1;
+      dy = 0;
     }
-  } else if (touchX > width / 2 && touchY < height / 2) {
+  } else if (touchX >= width / 2 && touchY < height / 2) {
     console.log("Top-right quadrant");
-    if (dx === 0) {
+    if (dx !== -1) { // Prevent 180 degree turn
       dx = 1;
       dy = 0;
     }
-  } else if (touchX > width / 2 && touchY > height / 2) {
+  } else if (touchX >= width / 2 && touchY >= height / 2) {
     console.log("Bottom-right quadrant");
-    if (dx === 0) {
-      dx = -1;
+    if (dx !== -1) { // Prevent 180 degree turn
+      dx = 1;
       dy = 0;
+    }
+  }
+
+  if (touchX < width / 2 && touchY < height / 2) {
+    console.log("Top-left quadrant");
+    if (dy !== 1) { // Prevent 180 degree turn
+      dx = 0;
+      dy = -1;
+    }
+  } else if (touchX < width / 2 && touchY >= height / 2) {
+    console.log("Bottom-left quadrant");
+    if (dy !== -1) { // Prevent 180 degree turn
+      dx = 0;
+      dy = 1;
+    }
+  } else if (touchX >= width / 2 && touchY < height / 2) {
+    console.log("Top-right quadrant");
+    if (dy !== 1) { // Prevent 180 degree turn
+      dx = 0;
+      dy = -1;
+    }
+  } else if (touchX >= width / 2 && touchY >= height / 2) {
+    console.log("Bottom-right quadrant");
+    if (dy !== -1) { // Prevent 180 degree turn
+      dx = 0;
+      dy = 1;
     }
   }
 }
